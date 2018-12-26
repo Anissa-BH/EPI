@@ -10,7 +10,7 @@ public class StudentManagement extends JFrame {
 	DatabaseManagement dataBaseManagement=new DatabaseManagement();
 	
 	JButton previousButton=new JButton("Previous");
-	JButton homeStudentManagementButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon//home.png"));
+	JButton homeStudentManagementButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon//smalhome.png"));
 	JLabel labelPanelNorthTitle=new JLabel("Student Management -- EPI School");
 	
 	String header[]= {"Id","First Name","Last Name","Sex","Phone Number","Mail Adress","Nationality","Training"};
@@ -33,9 +33,23 @@ public class StudentManagement extends JFrame {
 	JLabel labelMailAdress=new JLabel("E-mail Adress");
 	JTextField textFieldMailAdress=new JTextField();
 	
+	JLabel labelNationality=new JLabel("Nationality");
+	String[] nationalityItem = new String[] {"Tunisia","Maroc","Algeria","Mauritania","Senegal","Cameroon","Niger","France"};
+	JComboBox<String> comboNationality=new JComboBox<>(nationalityItem);
+	
+	JLabel labelTraining=new JLabel("Training");
+	String[] trainingItem = new String[] {"Preparatory","Computer Engineering","Electrical Engineering","Civil Engineering","Industrial Engineering","Mechanical Engineering","Electromechanical Engineering","Architecture","Bachelor of Accounting","Bachelor of Marketing","Bachelor of Marketing","Bachelor of Prodaction and Logistics","Bachelor of Finance","Bachelor of Business Administration","Master in Accounting","Master in Marketing","Master in Logistics","Master in Management","Master in Financial Engineering"};
+	JComboBox<String> comboTraining=new JComboBox<>(trainingItem);
+	
+	JPanel panelSexButton=new JPanel();
+	
+	JLabel labelSex=new JLabel("Sex");
+	ButtonGroup buttonGroup=new ButtonGroup();
+	JRadioButton radioButtonMale=new JRadioButton("Male",true);
+	JRadioButton radioButtonFemale=new JRadioButton("Female");
+	
 	JButton updateButton=new JButton("Update Student");
 	JButton deleteButton=new JButton("Delete Student");
-	JButton searchButton=new JButton("Search Student");
 	JButton viewAllStudentButton=new JButton("View All student");
 	
 	
@@ -49,7 +63,7 @@ public class StudentManagement extends JFrame {
 		this.setTitle("Student Management"); 
 		this.setSize(1370, 720);
 		
-		panelNorth.setBackground(Color.RED);
+		panelNorth.setBackground(Color.BLUE);
 		panelNorth.setPreferredSize(new Dimension(200,100));
 		
 		panelNorth.add(homeStudentManagementButton);
@@ -65,7 +79,7 @@ public class StudentManagement extends JFrame {
 		
 		panelEast.add(scrollStudentsList);
 		
-		panelWest.setLayout(new GridLayout(5,2,10,40));
+		panelWest.setLayout(new GridLayout(8,2,10,20));
 		panelWest.setPreferredSize(new Dimension(500,400));
 		
 		panelWest.add(labelId);
@@ -82,16 +96,31 @@ public class StudentManagement extends JFrame {
 		panelWest.add(labelPhoneNumber);
 		panelWest.add(textFieldPhoneNumber);
 		
-		//MailAdress
+		//Mail Address
 		panelWest.add(labelMailAdress);
 		panelWest.add(textFieldMailAdress);
 		
+		//Nationality
+		panelWest.add(labelNationality);
+		panelWest.add(comboNationality);
+		
+		//Sex radio Button
+		buttonGroup.add(radioButtonFemale);
+		buttonGroup.add(radioButtonMale);
+		panelSexButton.add(radioButtonFemale);
+		panelSexButton.add(radioButtonMale);
+		panelWest.add(labelSex);
+		panelWest.add(panelSexButton);
+		
+		//Training
+		panelWest.add(labelTraining);
+		panelWest.add(comboTraining);
 		
 		panelSouth.add(previousButton);
 		panelSouth.add(viewAllStudentButton);
 		panelSouth.add(updateButton);
 		panelSouth.add(deleteButton);
-		panelSouth.add(searchButton);
+		
 		
 		Container container=getContentPane();
 		container.add("North",panelNorth);

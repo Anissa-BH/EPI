@@ -9,9 +9,14 @@ import java.awt.event.MouseListener;
 public class PEvent implements ActionListener,MouseListener{
 	
 	Acceuil acceuil;
+	AcceuilUser acceuilUser;
 	Student student;
+	Registration registration;
+	Presentation presentation;
 	StudentManagement studentManagement;
 	DatabaseManagement dataBaseManagement=new DatabaseManagement();
+	Authentication authentication;
+	String username;
 	
 	
 	public PEvent(Acceuil acceuil) {
@@ -25,9 +30,81 @@ public class PEvent implements ActionListener,MouseListener{
 	public PEvent(StudentManagement studentManagement) {
 		this.studentManagement=studentManagement;
 	}
-	
+	public PEvent(Authentication authentication) {
+		this.authentication=authentication;
+	}
+	public PEvent(AcceuilUser acceuilUser) {
+		this.acceuilUser=acceuilUser;	
+	}
+	public PEvent(Registration registration) {
+		this.registration=registration;	
+	}
+	public PEvent(Presentation presentation) {
+			this.presentation=presentation;
+	}
 	public void actionPerformed(ActionEvent e) {
 		
+			//User home - go to Registration page
+				if(acceuilUser!=null && e.getSource()==acceuilUser.registrationButton) {
+					new Registration();
+					acceuilUser.setVisible(false);
+				}
+				//To do registration
+				if(registration!=null && e.getSource()==registration.validateRegistrationButton) {
+					addRegistration();
+					new AcceuilUser();
+					registration.setVisible(false);
+				}
+				// to display slideShow
+				if(acceuilUser!=null && e.getSource()==acceuilUser.presentationButton) {
+					new Presentation();
+					acceuilUser.setVisible(false);
+				}
+				// from acceuil user to home page
+				if(acceuilUser!=null && e.getSource()==acceuilUser.autheticationButton) {
+					new Authentication();
+					acceuilUser.setVisible(false);
+				}
+				
+				// to return from registration page to home page
+				if(registration!=null && e.getSource()==registration.homeRegistrationButton) {
+					new AcceuilUser();
+					registration.setVisible(false);
+				}
+				
+			//Login
+				if(authentication!=null && e.getSource()==authentication.loginButton) {
+					String query="SELECT login FROM user WHERE login ='"+authentication.textLogin.getText()+"' and password ='"+authentication.textPassword.getText()+"'";
+					ResultSet resultSet=dataBaseManagement.selectQuery(query);
+					
+					try {
+						
+						while(resultSet.next()) {
+						username= resultSet.getString("login");
+						if(username.equals("demo"))
+							new Acceuil();
+						else
+						new AcceuilUser();
+						
+						}
+						resultSet.close();
+					}
+					catch(Exception exception) {
+					System.out.println("Problem when recovering the username");
+					exception.printStackTrace();
+					}
+				}
+			//Event to go to identification page
+				if(acceuil!=null && e.getSource()==acceuil.autheticationButton) {
+					new Authentication();
+					acceuil.setVisible(false);
+				}
+			//from home page to management student page
+				if(acceuil!=null && e.getSource()==acceuil.parametreButton) {
+					new StudentManagement();
+					acceuil.setVisible(false);
+				}
+			    
 			//Event of student button in home page
 				if(acceuil!=null && e.getSource()==acceuil.etudiantButton) {
 					
@@ -47,12 +124,18 @@ public class PEvent implements ActionListener,MouseListener{
 							}
 			//Add student event
 				if(student!=null && e.getSource()==student.addStudentButton) {
-					addStudent();
-					student.textFieldFirstName.setText("");
-					student.textFieldLastName.setText("");
-					student.textFieldPhoneNumber.setText("");
-					student.textFieldMailAdress.setText("");
+					
+					if ((student.textFieldFirstName.getText().trim().length() > 0) && (student.textFieldLastName.getText().trim().length() > 0) &&(student.textFieldPhoneNumber.getText().trim().length() > 0) && (student.textFieldMailAdress.getText().trim().length() > 0)) {
+						
+						addStudent();
+						student.textFieldFirstName.setText("");
+						student.textFieldLastName.setText("");
+						student.textFieldPhoneNumber.setText("");
+						student.textFieldMailAdress.setText("");
 					}
+					else
+						JOptionPane.showMessageDialog(null,"Empty field not allowed", "Warning", JOptionPane.WARNING_MESSAGE);
+				}
 			//Show student management JFrame 
 				if(student!=null && e.getSource()==student.studentManagementButton) {
 					
@@ -77,7 +160,6 @@ public class PEvent implements ActionListener,MouseListener{
 				if(studentManagement!=null && e.getSource()==studentManagement.deleteButton)
 					deleteStudent();
 					refresh();
-				   
 	}
 	
 	public void mouseClicked(MouseEvent e) {
@@ -90,6 +172,7 @@ public class PEvent implements ActionListener,MouseListener{
 		studentManagement.textFieldLastName.setText(model.getValueAt(selectedRowIndex, 2).toString());
 		studentManagement.textFieldPhoneNumber.setText(model.getValueAt(selectedRowIndex, 4).toString());
 		studentManagement.textFieldMailAdress.setText(model.getValueAt(selectedRowIndex, 5).toString());
+		
 	}
 	
 	public void mousePressed(MouseEvent e) {}
@@ -114,7 +197,11 @@ public class PEvent implements ActionListener,MouseListener{
 		}
 	
 	public void updateStudent() {
-		String query="UPDATE student SET First_Name='"+studentManagement.textFieldFirstName.getText()+"',Last_Name='"+studentManagement.textFieldLastName.getText()+"',Phone_Number='"+studentManagement.textFieldPhoneNumber.getText()+"',Mail_Adress='"+studentManagement.textFieldMailAdress.getText()+"' WHERE Id_Student="+studentManagement.textFieldId.getText();
+		String sex="Homme";
+		if(studentManagement!=null && studentManagement.radioButtonFemale.isSelected()) 
+			sex="Femme";
+		
+		String query="UPDATE student SET First_Name='"+studentManagement.textFieldFirstName.getText()+"',Last_Name='"+studentManagement.textFieldLastName.getText()+"',Sex='"+sex+"',Nationality='"+studentManagement.comboNationality.getSelectedItem()+"',Phone_Number='"+studentManagement.textFieldPhoneNumber.getText()+"',Mail_Adress='"+studentManagement.textFieldMailAdress.getText()+"',Training='"+studentManagement.comboTraining.getSelectedItem()+"' WHERE Id_Student="+studentManagement.textFieldId.getText();
 		JOptionPane.showMessageDialog(null, (dataBaseManagement.updateQuery(query)>0)?"Student uppdated":"Student not uppdated", "Confirm message", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -131,6 +218,17 @@ public class PEvent implements ActionListener,MouseListener{
 		    studentManagement.textFieldPhoneNumber.setText("");
 		    studentManagement.textFieldMailAdress.setText("");
 	}
+	
+	public void addRegistration() {
+		String sex="Homme";
+		if(student!=null && student.radioButtonFemale.isSelected()) 
+			sex="Femme";
+			
+		String query="INSERT INTO student (First_Name,Last_Name,Sex,Phone_Number,Mail_Adress,Nationality,Training) VALUES ('"+registration.textFieldFirstName.getText()+"','"+registration.textFieldLastName.getText()+"','"+sex+"',"+registration.textFieldPhoneNumber.getText()+",'"+registration.textFieldMailAdress.getText()+"','"+registration.comboNationality.getSelectedItem()+"','"+registration.comboTraining.getSelectedItem()+"')";
+		JOptionPane.showMessageDialog(null, (dataBaseManagement.updateQuery(query)>0)?"You are registered !":"Error", "Confirm message", JOptionPane.INFORMATION_MESSAGE);
+}
+	
+	
 	
 
 }

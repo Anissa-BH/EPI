@@ -10,9 +10,9 @@ public class Acceuil extends JFrame{
 	JPanel panelHaut=new JPanel();
 	JPanel panelBas=new JPanel();
 	JLabel welcomeLabel=new JLabel("Welcome to the Student Management Application");
-	JButton maisonButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon/home1.png"));
-	JButton etudiantButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon/student.png"));
-	JButton parametreButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon/settings.png"));
+	JButton autheticationButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon/home1.png"));
+	JButton etudiantButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon/addStudent.png"));
+	JButton parametreButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon/admin.png"));
 	
 
 	public Acceuil() {
@@ -32,29 +32,29 @@ public class Acceuil extends JFrame{
 		
 		panelBas.setPreferredSize(new Dimension(800,400));
 		
-		maisonButton.setBackground(Color.white);
+		autheticationButton.setBackground(Color.white);
 		etudiantButton.setBackground(Color.white);
 		parametreButton.setBackground(Color.white);
 		
 		
-		maisonButton.setPreferredSize(new Dimension(160,160));
+		autheticationButton.setPreferredSize(new Dimension(160,160));
 		etudiantButton.setPreferredSize(new Dimension(160,160));
 		parametreButton.setPreferredSize(new Dimension(160,160));
 		
-		panelBas.add(maisonButton);
+		panelBas.add(autheticationButton);
 	    panelBas.add(etudiantButton);
 		panelBas.add(parametreButton); 
 		
 		
 		container.add("North",panelHaut);
 		container.add("Center",panelBas);
+		setVisible(true);
 		
 		//Event of student button ** Displaying student page 
 		PEvent pEvent=new PEvent(this);
 		etudiantButton.addActionListener(pEvent);
-		
-		
-		setVisible(true);
+		autheticationButton.addActionListener(pEvent);
+		parametreButton.addActionListener(pEvent);
 	}
 	
 	public static void main(String[] args) {

@@ -62,10 +62,8 @@ public class DatabaseManagement {
 		  System.out.println("Error creating statement");
 	  }
 	  try{
-		  System.out.println("execute query OK");
 		  return statement.executeQuery(query);
-		  
-	  }
+	  	}
 	  catch(SQLException e) {
 		  System.out.println("Error resultSet query");
 	  }

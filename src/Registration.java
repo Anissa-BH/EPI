@@ -1,17 +1,16 @@
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import  java.awt.*;
 import java.awt.event.*;
 
-public class Student extends JFrame{
+public class Registration extends JFrame{
 	
 	
 	//Adding panel north
 	JPanel panelNorth=new JPanel();
-	JLabel labelPanelNorthTitle=new JLabel("Add Student -- EPI School");
-	JButton homeStudentButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon//smalhome.png"));
+	JLabel labelPanelNorthTitle=new JLabel("Registration ");
+	JButton homeRegistrationButton=new JButton(new ImageIcon("C://Users//DELL//Desktop//JavaIcon//home.png"));
 	
 	//Components of center Panel
 	JLabel labelFirstName=new JLabel("First Name");
@@ -42,12 +41,11 @@ public class Student extends JFrame{
 	JPanel panelCenter=new JPanel();
 	
 	//Components of south Panel
-	JButton addStudentButton=new JButton("Add Student");
-	JButton studentManagementButton=new JButton("Student Management");
+	JButton validateRegistrationButton=new JButton("Registration");
 	
 	JPanel panelSouth=new JPanel();
 	
-	public Student() {
+	public Registration() {
 		
 		this.setTitle("Student");
 		this.setSize(1370, 720);
@@ -58,10 +56,10 @@ public class Student extends JFrame{
 		labelPanelNorthTitle.setForeground(Color.white);
 		
 		//Adding label to the north panel
-		homeStudentButton.setPreferredSize(new Dimension(64,64));
-		homeStudentButton.setBackground(Color.white);
+		homeRegistrationButton.setPreferredSize(new Dimension(64,64));
+		homeRegistrationButton.setBackground(Color.white);
 		
-		panelNorth.add(homeStudentButton);
+		panelNorth.add(homeRegistrationButton);
 		panelNorth.add(labelPanelNorthTitle);
 		
 		//Adding components to the center panel 
@@ -136,13 +134,11 @@ public class Student extends JFrame{
 		panelCenter.setLayout(new GridLayout(8,4,20,20));
 		
 		//Set a background to the north panel
-		panelNorth.setBackground(Color.BLUE);
+		panelNorth.setBackground(Color.red);
 		panelNorth.setPreferredSize(new Dimension(200,100));
 		
 		//Adding components to the west panel
-		panelSouth.add(addStudentButton);
-		panelSouth.add(studentManagementButton);
-		
+		panelSouth.add(validateRegistrationButton);
 		
 		//Container creation
 		Container container=getContentPane();
@@ -153,18 +149,16 @@ public class Student extends JFrame{
 		container.add("South",panelSouth);
 		
 		//Event processing ** back to the main page after the click of the Home button
-		PEvent pEvent=new PEvent(this);
-		
-		homeStudentButton.addActionListener(pEvent);
-		addStudentButton.addActionListener(pEvent);
-		studentManagementButton.addActionListener(pEvent);
-		
 		
 		this.setVisible(true);
+		
+		PEvent pEvent=new PEvent(this);
+		homeRegistrationButton.addActionListener(pEvent);
+		validateRegistrationButton.addActionListener(pEvent);
 	}
 
 	public static void main(String[] args) {
-		new Student();
+		new Registration();
 		
 
 	}
