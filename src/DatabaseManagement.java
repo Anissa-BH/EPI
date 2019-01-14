@@ -72,6 +72,7 @@ public class DatabaseManagement {
 
  public DefaultTableModel fillList(DefaultTableModel model,String query) {
 	 try {
+		 model.setRowCount(0);
 	 resultSet=selectQuery(query);
 	 int columsNumber=model.getColumnCount();
 	 while(resultSet.next()) {

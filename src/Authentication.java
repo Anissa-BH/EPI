@@ -9,7 +9,7 @@ public class Authentication extends JFrame{
 	JPanel panelCenter = new JPanel();
 	JPanel panelSouth = new JPanel();
 	JPanel globalPanel = new JPanel();
-	JLabel labellogin = new JLabel("Login");
+	JLabel labellogin = new JLabel("Username");
 	JTextField textLogin = new JTextField();
 	JLabel labelPassword = new JLabel("Password");
 	JPasswordField textPassword = new JPasswordField();
@@ -31,6 +31,7 @@ public class Authentication extends JFrame{
 		panelBackground.add(labelBackground);
 		globalPanelPicture.add(panelBackground);
 		Container container=getContentPane();
+		
 		container.add("North",globalPanelPicture);
 		container.add("South",globalPanel);
 		

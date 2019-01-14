@@ -4,9 +4,8 @@ import  java.awt.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.MouseListener;
 
-public class PEvent implements ActionListener,MouseListener{
+public class PEvent implements ActionListener,MouseListener,KeyListener{
 	
 	Acceuil acceuil;
 	AcceuilUser acceuilUser;
@@ -17,7 +16,6 @@ public class PEvent implements ActionListener,MouseListener{
 	DatabaseManagement dataBaseManagement=new DatabaseManagement();
 	Authentication authentication;
 	String username;
-	
 	
 	public PEvent(Acceuil acceuil) {
 		this.acceuil=acceuil;	
@@ -42,6 +40,7 @@ public class PEvent implements ActionListener,MouseListener{
 	public PEvent(Presentation presentation) {
 			this.presentation=presentation;
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		
 			//User home - go to Registration page
@@ -78,14 +77,21 @@ public class PEvent implements ActionListener,MouseListener{
 					ResultSet resultSet=dataBaseManagement.selectQuery(query);
 					
 					try {
-						
+						if(!resultSet.isBeforeFirst()) {
+							JOptionPane.showMessageDialog(null, "Username or password incorrect","identification",JOptionPane.ERROR_MESSAGE);							
+						}
+					}
+					catch(Exception e1) {
+						System.out.println("Error for verify is resultset is empty");
+						e1.printStackTrace();
+					}
+					try {
 						while(resultSet.next()) {
 						username= resultSet.getString("login");
 						if(username.equals("demo"))
 							new Acceuil();
 						else
 						new AcceuilUser();
-						
 						}
 						resultSet.close();
 					}
@@ -227,6 +233,16 @@ public class PEvent implements ActionListener,MouseListener{
 		String query="INSERT INTO student (First_Name,Last_Name,Sex,Phone_Number,Mail_Adress,Nationality,Training) VALUES ('"+registration.textFieldFirstName.getText()+"','"+registration.textFieldLastName.getText()+"','"+sex+"',"+registration.textFieldPhoneNumber.getText()+",'"+registration.textFieldMailAdress.getText()+"','"+registration.comboNationality.getSelectedItem()+"','"+registration.comboTraining.getSelectedItem()+"')";
 		JOptionPane.showMessageDialog(null, (dataBaseManagement.updateQuery(query)>0)?"You are registered !":"Error", "Confirm message", JOptionPane.INFORMATION_MESSAGE);
 }
+	
+	public void keyPressed(KeyEvent e) {
+		
+		if(e.getKeyCode()==KeyEvent.VK_ENTER) 
+			presentation.setVisible(false);
+			new AcceuilUser();
+	}
+	
+	public void keyReleased(KeyEvent arg0) {}
+	public void keyTyped(KeyEvent arg0) {}
 	
 	
 	
