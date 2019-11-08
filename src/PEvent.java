@@ -38,7 +38,7 @@ public class PEvent implements ActionListener,MouseListener,KeyListener{
 		this.registration=registration;	
 	}
 	public PEvent(Presentation presentation) {
-			this.presentation=presentation;
+	        this.presentation=presentation;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -71,7 +71,7 @@ public class PEvent implements ActionListener,MouseListener,KeyListener{
 					registration.setVisible(false);
 				}
 				
-			//Login
+			        //Login
 				if(authentication!=null && e.getSource()==authentication.loginButton) {
 					String query="SELECT login FROM user WHERE login ='"+authentication.textLogin.getText()+"' and password ='"+authentication.textPassword.getText()+"'";
 					ResultSet resultSet=dataBaseManagement.selectQuery(query);
@@ -100,35 +100,35 @@ public class PEvent implements ActionListener,MouseListener,KeyListener{
 					exception.printStackTrace();
 					}
 				}
-			//Event to go to identification page
+			        //Event to go to identification page
 				if(acceuil!=null && e.getSource()==acceuil.autheticationButton) {
 					new Authentication();
 					acceuil.setVisible(false);
 				}
-			//from home page to management student page
+			        //from home page to management student page
 				if(acceuil!=null && e.getSource()==acceuil.parametreButton) {
 					new StudentManagement();
 					acceuil.setVisible(false);
 				}
 			    
-			//Event of student button in home page
+			        //Event of student button in home page
 				if(acceuil!=null && e.getSource()==acceuil.etudiantButton) {
 					
 					Student student=new Student();
 					acceuil.setVisible(false);
 					}
 			
-			//Event of home button in student page
+			        //Event of home button in student page
 				if(student!=null && e.getSource()==student.homeStudentButton) {
 					Acceuil acceuil=new Acceuil();
 					student.setVisible(false);
 					}
-			//Event of home button in student management page
+			        //Event of home button in student management page
 						if(studentManagement!=null && e.getSource()==studentManagement.homeStudentManagementButton) {
 							Acceuil acceuil=new Acceuil();
 							studentManagement.setVisible(false);
 							}
-			//Add student event
+			        //Add student event
 				if(student!=null && e.getSource()==student.addStudentButton) {
 					
 					if ((student.textFieldFirstName.getText().trim().length() > 0) && (student.textFieldLastName.getText().trim().length() > 0) &&(student.textFieldPhoneNumber.getText().trim().length() > 0) && (student.textFieldMailAdress.getText().trim().length() > 0)) {
@@ -142,13 +142,13 @@ public class PEvent implements ActionListener,MouseListener,KeyListener{
 					else
 						JOptionPane.showMessageDialog(null,"Empty field not allowed", "Warning", JOptionPane.WARNING_MESSAGE);
 				}
-			//Show student management JFrame 
+			        //Show student management JFrame 
 				if(student!=null && e.getSource()==student.studentManagementButton) {
 					
 					new StudentManagement();
 					student.setVisible(false);
 					}
-			// View All student event button
+			        // View All student event button
 				if(studentManagement!=null && e.getSource()==studentManagement.viewAllStudentButton) {
 					viewStudents();
 				}
@@ -218,7 +218,7 @@ public class PEvent implements ActionListener,MouseListener,KeyListener{
 	}
 	
 	public void refresh() {
-			studentManagement.textFieldId.setText("");
+		    studentManagement.textFieldId.setText("");
 		    studentManagement.textFieldFirstName.setText("");
 		    studentManagement.textFieldLastName.setText("");
 		    studentManagement.textFieldPhoneNumber.setText("");
@@ -243,8 +243,5 @@ public class PEvent implements ActionListener,MouseListener,KeyListener{
 	
 	public void keyReleased(KeyEvent arg0) {}
 	public void keyTyped(KeyEvent arg0) {}
-	
-	
-	
 
 }
