@@ -6,7 +6,6 @@ import java.awt.event.*;
 
 public class Registration extends JFrame{
 	
-	
 	//Adding panel north
 	JPanel panelNorth=new JPanel();
 	JLabel labelPanelNorthTitle=new JLabel("Registration ");
@@ -159,8 +158,5 @@ public class Registration extends JFrame{
 
 	public static void main(String[] args) {
 		new Registration();
-		
-
 	}
-
 }
