@@ -4,7 +4,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class DatabaseManagement {
 	
-
 	Connection connection=null;
 	Statement statement=null;
 	ResultSet resultSet=null;
@@ -72,7 +71,7 @@ public class DatabaseManagement {
 
  public DefaultTableModel fillList(DefaultTableModel model,String query) {
 	 try {
-		 model.setRowCount(0);
+	 model.setRowCount(0);
 	 resultSet=selectQuery(query);
 	 int columsNumber=model.getColumnCount();
 	 while(resultSet.next()) {
@@ -88,6 +87,4 @@ public class DatabaseManagement {
 	 }
 	 return model;
  }
-
-
 }
