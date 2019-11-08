@@ -42,7 +42,7 @@ public class Acceuil extends JFrame{
 		parametreButton.setPreferredSize(new Dimension(160,160));
 		
 		panelBas.add(autheticationButton);
-	    panelBas.add(etudiantButton);
+	        panelBas.add(etudiantButton);
 		panelBas.add(parametreButton); 
 		
 		
