@@ -1,12 +1,10 @@
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import  java.awt.*;
 import java.awt.event.*;
 
 public class Student extends JFrame{
-	
 	
 	//Adding panel north
 	JPanel panelNorth=new JPanel();
@@ -96,7 +94,6 @@ public class Student extends JFrame{
 		panelCenter.add(labelNationality);
 		panelCenter.add(comboNationality);
 		
-		
 		//Grouping radio Buttons
 		
 		buttonGroup.add(radioButtonFemale);
@@ -107,7 +104,6 @@ public class Student extends JFrame{
 		//Sex
 		panelCenter.add(labelSex);
 		panelCenter.add(panelSexButton);
-		
 		
 		//Adding Item to Combo Training
 		comboTraining.addItem("Preparatory");
@@ -143,7 +139,6 @@ public class Student extends JFrame{
 		panelSouth.add(addStudentButton);
 		panelSouth.add(studentManagementButton);
 		
-		
 		//Container creation
 		Container container=getContentPane();
 		
@@ -159,14 +154,10 @@ public class Student extends JFrame{
 		addStudentButton.addActionListener(pEvent);
 		studentManagementButton.addActionListener(pEvent);
 		
-		
 		this.setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		new Student();
-		
-
 	}
-
 }
