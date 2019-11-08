@@ -50,10 +50,10 @@ public class AcceuilUser extends JFrame{
 		autheticationButton.setPreferredSize(new Dimension(160,160));
 		
 		panelBas.add(autheticationButton);
-	    panelBas.add(registrationButton);
+	        panelBas.add(registrationButton);
 		panelBas.add(presentationButton);
-	    panelBas.add(registrationButton);
-	    panelBas.setBackground(Color.white);
+	        panelBas.add(registrationButton);
+	        panelBas.setBackground(Color.white);
 		//panelBas.add(parametreButton); 
 		
 		container.add("North",panelHaut);
